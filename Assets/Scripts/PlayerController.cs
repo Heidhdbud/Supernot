@@ -10,25 +10,38 @@ public class PlayerController : Singleton<PlayerController>
     private float zInput;
     private Vector3 direction;
     private Rigidbody rb;
-    public Transform orientation;
+    [SerializeField] private Transform orientation;
 
     [Header("SlowTime")]
-    float slowSpeedMultiplier;
-    float slowCooldown;
-    float timeInSlow;
+    [SerializeField] private float slowSpeedMultiplier;
+    [SerializeField] private float slowCooldown;
+    [SerializeField] private float timeInSlow;
 
     [Header("Dashing")]
     public float dashPower;
+    [SerializeField] private float dashCooldown;
+    private float dashCountCooldown;
+    private bool dashing;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
+    void Update()
+    {
+        dashCountCooldown += Time.deltaTime;
+        if (dashCountCooldown >= dashCooldown / 4) // stop dashing 1/4th of the way into the cooldown
+        {
+            dashing = false;
+        }
+    }
+
     void FixedUpdate()
     {
         GetInput();
         Move();
+        Dash();
     }
 
     private void GetInput()
@@ -46,8 +59,25 @@ public class PlayerController : Singleton<PlayerController>
         if (XZVelocity.magnitude > moveSpeed) // if it's more than max speed
         {
             // Clamp the speed to be maximum speed
-            XZVelocity = XZVelocity.normalized * moveSpeed;
+            XZVelocity = dashing ? XZVelocity.normalized * dashPower : XZVelocity.normalized * moveSpeed;
             rb.velocity = new Vector3(XZVelocity.x, rb.velocity.y, XZVelocity.z);
+        }
+    }
+
+    private void Dash()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && dashCountCooldown >= dashCooldown)
+        {
+            dashCountCooldown = 0f;
+            dashing = true;
+            if (direction != Vector3.zero)
+            {
+                rb.AddForce(direction.normalized * dashPower * 10f, ForceMode.Impulse);
+            }
+            else // if player isnt holding direction, dash forward
+            {
+                rb.AddForce(orientation.forward * dashPower * 10f, ForceMode.Impulse);
+            }
         }
     }
 }
