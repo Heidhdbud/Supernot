@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class PlayerController : Singleton<PlayerController>
 {
+    [Header("Movement")]
     public float moveSpeed;
-    private bool canSprint;
-
     private float xInput;
     private float zInput;
     private Vector3 direction;
     private Rigidbody rb;
-
     public Transform orientation;
+
+    [Header("SlowTime")]
+    float slowSpeedMultiplier;
+    float slowCooldown;
+    float timeInSlow;
+
+    [Header("Dashing")]
+    public float dashPower;
 
     void Start()
     {
