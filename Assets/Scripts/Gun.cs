@@ -58,8 +58,9 @@ public class Gun : MonoBehaviour
         bullet.transform.position = shootPos.position;
         bullet.transform.rotation = shootPos.rotation;
         //play effects
-        //Instantiate(spark,sparkPos);
-        //firingSound.Play();
+        GameObject sparks = Instantiate(spark,sparkPos.position,sparkPos.rotation);
+        sparks.transform.parent = sparkPos;
+        firingSound.Play();
         //shoot
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.AddForce(shootPos.forward * shootForce);
