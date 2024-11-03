@@ -5,23 +5,28 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     [Header("BulletPooling")]
-    private List<GameObject> poolBullets = new List<GameObject>();
-    protected int amountToPool;
-    protected GameObject bulletPrefabs;
+    [SerializeField] protected List<GameObject> poolBullets = new List<GameObject>();
+    [SerializeField] protected int amountToPool;
+    [SerializeField] protected GameObject bulletPrefabs;
 
     [Header("Shooting")]
-    protected Transform shootPos;
-    protected float shootForce;
-    protected float shootDelay;
+    [SerializeField] protected Transform shootPos;
+    [SerializeField] protected float shootForce;
+    [SerializeField] protected float shootDelay;
     protected float timeSinceLastShot;
 
     [Header("VFX&SFX")]
-    protected GameObject spark;
-    protected AudioSource firingSound;
+    [SerializeField,Tooltip("For player use the gun barrel end position. For enemy use the same as shoot position")] Transform sparkPos;
+    [SerializeField] protected GameObject spark;
+    [SerializeField] protected AudioSource firingSound;
 
-    private void Awake()
+    protected void Awake()
     {
         CreateBullets();
+    }
+    protected virtual void Update()
+    {
+        timeSinceLastShot += Time.deltaTime;
     }
 
     protected void CreateBullets()
@@ -44,18 +49,19 @@ public class Gun : MonoBehaviour
         }
         return null;
     }
-    protected virtual void Shoot()
+    protected void Shoot()
     {
         timeSinceLastShot = 0f;
         //get bullet
         GameObject bullet = GetBullet();
+        bullet.SetActive(true);
         bullet.transform.position = shootPos.position;
         bullet.transform.rotation = shootPos.rotation;
         //play effects
-        Instantiate(spark, shootPos);
-        firingSound.Play();
+        //Instantiate(spark,sparkPos);
+        //firingSound.Play();
         //shoot
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        rb.AddForce(shootPos.forward * shootForce , ForceMode.Impulse);
+        rb.AddForce(shootPos.forward * shootForce);
     }
 }
