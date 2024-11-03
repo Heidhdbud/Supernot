@@ -21,11 +21,14 @@ public class Enemy : MonoBehaviour
     public float walkPointRange;
     [Header("State")]
     private State _currentState;
+
+    [Header("Attack")]
+    [SerializeField] EnemyGun thisGun;
     private void Awake()
     {
         _player = GameObject.FindGameObjectWithTag("Player").transform;
         _agent = GetComponent<NavMeshAgent>();
-        _currentState = new Patrol(this, _agent);
+        _currentState = new Patrol(this, _agent, thisGun);
     }
     private void Start()
     {
@@ -50,8 +53,8 @@ public class Enemy : MonoBehaviour
         //Shows enemy attack range in Scene window
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
-        Gizmos.color = Color.blue;
         //Show enemy random walk range
+        Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, walkPointRange);
     }
 }

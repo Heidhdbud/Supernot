@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Patrol : State
 {
-    public Patrol(Enemy enemy, NavMeshAgent agent) : base(enemy, agent)
+    public Patrol(Enemy enemy, NavMeshAgent agent, EnemyGun gun) : base(enemy, agent, gun)
     {
         Name = STATE.CHASE;
     }
@@ -27,12 +27,12 @@ public class Patrol : State
 
         if (Me.playerInChaseRange && !Me.playerInAttackRange)
         {
-            NextState = new Chase(Me, Agent);
+            NextState = new Chase(Me, Agent, Gun);
             Stage = EVENT.EXIT;
         }
         if (Me.playerInChaseRange && Me.playerInAttackRange)
         {
-            NextState = new Attack(Me, Agent);
+            NextState = new Attack(Me, Agent, Gun);
             Stage = EVENT.EXIT;
         }
     }

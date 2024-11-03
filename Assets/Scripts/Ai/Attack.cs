@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class Attack : State
 {
-    public Attack(Enemy enemy, NavMeshAgent agent) : base(enemy, agent)
+    public Attack(Enemy enemy, NavMeshAgent agent, EnemyGun gun) : base(enemy, agent, gun)
     {
         Name = STATE.ATTACK;
     }
@@ -11,19 +11,28 @@ public class Attack : State
     public override void Enter()
     {
         base.Enter();
+        Gun.readyToAttack = true;
     }
     public override void Update()
     {
         Agent.SetDestination(Me.transform.position);
+        Me.transform.LookAt(Me._player.transform.position);
+        
+        if (!Me.playerInChaseRange && !Me.playerInAttackRange)
+        {
+            NextState = new Patrol(Me, Agent, Gun);
+            Stage = EVENT.EXIT;
+        }
         if (Me.playerInChaseRange && !Me.playerInAttackRange)
         {
-            NextState = new Patrol(Me, Agent);
+            NextState = new Chase(Me, Agent, Gun);
             Stage = EVENT.EXIT;
         }
     }
 
     public override void Exit()
     {
+        Gun.readyToAttack = false;
         base.Exit();
     }
 }

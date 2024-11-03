@@ -5,7 +5,7 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     [Header("BulletPooling")]
-    [SerializeField] protected List<GameObject> poolBullets = new List<GameObject>();
+    protected List<GameObject> poolBullets = new List<GameObject>();
     [SerializeField] protected int amountToPool;
     [SerializeField] protected GameObject bulletPrefabs;
 
@@ -13,7 +13,7 @@ public class Gun : MonoBehaviour
     [SerializeField] protected Transform shootPos;
     [SerializeField] protected float shootForce;
     [SerializeField] protected float shootDelay;
-    protected float timeSinceLastShot;
+    protected float timeSinceLastShot = 0f;
 
     [Header("VFX&SFX")]
     [SerializeField,Tooltip("For player use the gun barrel end position. For enemy use the same as shoot position")] Transform sparkPos;

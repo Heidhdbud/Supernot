@@ -26,13 +26,15 @@ public class State
 
     protected Enemy Me;
     protected NavMeshAgent Agent;
+    protected EnemyGun Gun;
 
-    public State(Enemy enemy , NavMeshAgent agent)
+    public State(Enemy enemy , NavMeshAgent agent, EnemyGun gun)
     {
         Me = enemy;
         Agent = agent;
-
+        Gun = gun;
         Stage = EVENT.ENTER;
+        
     }
     /// <summary>
     /// What to do enter this stage

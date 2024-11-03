@@ -6,8 +6,9 @@ public class PlayerGun : Gun
 {
     [Header("Ammo")]
     [SerializeField] int ammo;
-    private void FixedUpdate()
+    protected override void Update()
     {
+        base.Update();
         Trigger();
     }
     private void Trigger()
