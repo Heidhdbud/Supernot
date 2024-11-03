@@ -25,8 +25,8 @@ public class CameraController : MonoBehaviour
 
     public void GetMouseInput()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * senX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * senY;
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.unscaledDeltaTime * senX;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.unscaledDeltaTime * senY;
         yrotation += mouseX;
         xrotation -= mouseY;
         xrotation = Mathf.Clamp(xrotation, -90f, 90f); //clamp up down camera rotation

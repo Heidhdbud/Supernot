@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyGun : Gun
 {
     [Header("Enemy")]
-    [SerializeField, Range(1f, 1.75f)] private new float shootDelay;
+    [Range(1f, 1.75f)] private new float shootDelay;
     public bool readyToAttack;
     
     protected override void Update()

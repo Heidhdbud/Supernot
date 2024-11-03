@@ -15,7 +15,10 @@ public class PlayerController : Singleton<PlayerController>
     [Header("SlowTime")]
     [SerializeField] private float slowSpeedMultiplier;
     [SerializeField] private float slowCooldown;
+    private float slowCountCooldown;
     [SerializeField] private float timeInSlow;
+    [SerializeField] private float slowScale = 0.2f;
+    private bool isSlow;
 
     [Header("Dashing")]
     public float dashPower;
@@ -31,9 +34,17 @@ public class PlayerController : Singleton<PlayerController>
     void Update()
     {
         dashCountCooldown += Time.deltaTime;
+        slowCountCooldown += Time.deltaTime;
+        
         if (dashCountCooldown >= dashCooldown / 4) // stop dashing 1/4th of the way into the cooldown
         {
             dashing = false;
+        }
+
+        Dash();
+        if (Input.GetKeyDown(KeyCode.Space) && !isSlow && slowCountCooldown >= slowCooldown)
+        {
+            StartCoroutine(SlowTime());
         }
     }
 
@@ -41,7 +52,6 @@ public class PlayerController : Singleton<PlayerController>
     {
         GetInput();
         Move();
-        Dash();
     }
 
     private void GetInput()
@@ -80,5 +90,21 @@ public class PlayerController : Singleton<PlayerController>
                 rb.AddForce(orientation.forward * dashPower * 10f, ForceMode.Impulse);
             }
         }
+    }
+
+    private IEnumerator SlowTime()
+    {
+        isSlow = true;
+        Debug.Log("Start slow");
+        Time.timeScale = slowScale;
+        moveSpeed *= slowSpeedMultiplier;
+        
+        yield return new WaitForSecondsRealtime(timeInSlow);
+        
+        Time.timeScale = 1f;
+        isSlow = false;
+        Debug.Log("Stop slow");   
+        slowCountCooldown = 0f;
+        moveSpeed /= slowSpeedMultiplier;
     }
 }

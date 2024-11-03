@@ -20,9 +20,9 @@ public class State
         EXIT
     }
 
-    public STATE Name; //state ¹Õé¤×ÍÍÐäÃ
-    protected EVENT Stage; //¡ÓÅÑ§·ÓÍÐäÃÍÂÙèã¹ state ¹Õé
-    protected State NextState; //¨Ðä» state äË¹µèÍ
+    public STATE Name; //state ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    protected EVENT Stage; //ï¿½ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ state ï¿½ï¿½ï¿½
+    protected State NextState; //ï¿½ï¿½ï¿½ state ï¿½Ë¹ï¿½ï¿½ï¿½
 
     protected Enemy Me;
     protected NavMeshAgent Agent;
@@ -42,8 +42,6 @@ public class State
     public virtual void Enter()
     {
         Stage = EVENT.UPDATE;
-
-        Debug.Log($"Enter {Name} State");
     }
     /// <summary>
     /// What to do when is in this stage. Including condition to change stage.
@@ -59,7 +57,6 @@ public class State
     public virtual void Exit()
     {
         Stage = EVENT.UPDATE;
-        Debug.Log($"Exit {Name} State");
     }
     public State Process()
     {
