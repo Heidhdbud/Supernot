@@ -103,8 +103,8 @@ MonoBehaviour:
   slowSpeedMultiplier: 0
   slowCooldown: 0
   timeInSlow: 0
-  dashPower: 6
-  dashCooldown: 2
+  dashPower: 5
+  dashCooldown: 1
 --- !u!1 &2933651079265218264
 GameObject:
   m_ObjectHideFlags: 0
