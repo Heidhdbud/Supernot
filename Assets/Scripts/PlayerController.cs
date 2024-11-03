@@ -54,12 +54,13 @@ public class PlayerController : Singleton<PlayerController>
     {
         direction = orientation.forward * zInput + orientation.right * xInput;
         rb.AddForce(direction.normalized * moveSpeed * 10f, ForceMode.Force);
+        rb.AddForce(Vector3.down * 9.8f, ForceMode.Force);
 
         Vector3 XZVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         if (XZVelocity.magnitude > moveSpeed) // if it's more than max speed
         {
             // Clamp the speed to be maximum speed
-            XZVelocity = dashing ? XZVelocity.normalized * dashPower : XZVelocity.normalized * moveSpeed;
+            XZVelocity = dashing ? XZVelocity.normalized * (dashPower + moveSpeed) : XZVelocity.normalized * moveSpeed;
             rb.velocity = new Vector3(XZVelocity.x, rb.velocity.y, XZVelocity.z);
         }
     }
