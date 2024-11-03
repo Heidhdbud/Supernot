@@ -14,7 +14,9 @@ public class Bullet : MonoBehaviour
     private void OnDisable()
     {
         rb.velocity = Vector3.zero;
+        transform.rotation = Quaternion.Euler(Vector3.zero);
         trailRenderer.Clear();
+        
     }
     private void OnCollisionEnter(Collision collision)
     {

@@ -16,7 +16,9 @@ public class Attack : State
     public override void Update()
     {
         Agent.SetDestination(Me.transform.position);
-        Me.transform.LookAt(Me._player.transform.position);
+        Gun.transform.LookAt(Me._player);
+        Me.transform.LookAt(Me._player);
+        
         
         if (!Me.playerInChaseRange && !Me.playerInAttackRange)
         {

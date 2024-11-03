@@ -36,7 +36,7 @@ Transform:
   - {fileID: 7797965890425315344}
   - {fileID: 9149924784156693895}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1994647323701749959
 MeshFilter:
@@ -146,7 +146,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &9168973589731876708
 GameObject:
@@ -299,6 +299,11 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3060084433364081170, guid: fb63ae72263711b4e853e13de1fe1b62,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 163e4eaef72b9fd4ba686b5e636f13ba, type: 2}
     - target: {fileID: 3168335386970392034, guid: fb63ae72263711b4e853e13de1fe1b62,
         type: 3}
       propertyPath: m_Name
