@@ -1,15 +1,30 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using DG.Tweening;
 public class GameManager : Singleton<GameManager>
 {
+    [Header("Menu")]
+    [SerializeField] CanvasGroup menuUI;
+    [SerializeField] CinemachineVirtualCamera playerCam;
+    [SerializeField] CinemachineVirtualCamera MenuCam;
+    GameObject player;
+    [Header("Win Control")]
+    [SerializeField] GameObject LoseUI;
+    [SerializeField] GameObject WinUI;
     private bool gameFinished = false;
     public List<GameObject> enemies;
 
+    public void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        player.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
     void Update()
     {
         if (gameFinished && Input.GetKeyDown(KeyCode.Space))
@@ -21,24 +36,31 @@ public class GameManager : Singleton<GameManager>
 
     public void EndGame(bool won)
     {
-        TextMeshProUGUI[] textlist = null;
         if (won)
         {
-            GameObject parent = GameObject.FindWithTag("YouWin");
-            textlist = parent.GetComponentsInChildren<TextMeshProUGUI>(true);
-            
+            WinUI.SetActive(true);
         }
         else
         {
-            GameObject parent = GameObject.FindWithTag("GameOver");
-            textlist = parent.GetComponentsInChildren<TextMeshProUGUI>(true);
-        }
-
-        foreach (TextMeshProUGUI text in textlist)
-        {
-            text.enabled = true;
+            LoseUI.SetActive(true);
         }
         
         gameFinished = true;
+    }
+    public void StartButton()
+    {
+        menuUI.DOFade(0f, 1f);
+        player.SetActive(true);
+
+        MenuCam.Priority = 1;
+        MenuCam.gameObject.SetActive(false);
+        playerCam.Priority = 10;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+    public void QuitButton()
+    {
+        Application.Quit();
     }
 }
