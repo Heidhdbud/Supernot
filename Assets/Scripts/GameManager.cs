@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using System.Linq;
 public class GameManager : Singleton<GameManager>
 {
     [Header("Menu")]
@@ -24,13 +25,15 @@ public class GameManager : Singleton<GameManager>
         player.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        enemies = GameObject.FindGameObjectsWithTag("Enemy").ToList();
     }
     void Update()
     {
         if (gameFinished && Input.GetKeyDown(KeyCode.Space))
         {
             Time.timeScale = 1f;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // reload scene
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex,LoadSceneMode.Single); // reload scene
         }
     }
 
