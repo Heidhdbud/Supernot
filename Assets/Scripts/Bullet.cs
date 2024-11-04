@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     Rigidbody rb;
     TrailRenderer trailRenderer;
+    public bool isPlayer = false;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -20,6 +21,24 @@ public class Bullet : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.tag == "Enemy" && isPlayer)
+        {
+            var enemy = collision.gameObject;
+            GameManager.Instance.enemies.Remove(enemy);
+
+            if (GameManager.Instance.enemies.Count == 0)
+            {
+                GameManager.Instance.EndGame(true);
+            }
+
+            enemy.SetActive(false);
+        }
+        else if (collision.gameObject.tag == "Player" && !isPlayer)
+        {
+            collision.gameObject.SetActive(false);
+            GameManager.Instance.EndGame(false);
+        }
+
         gameObject.SetActive(false);
     }
 }

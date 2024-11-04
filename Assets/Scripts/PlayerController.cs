@@ -100,7 +100,7 @@ public class PlayerController : Singleton<PlayerController>
         moveSpeed *= slowSpeedMultiplier;
         
         yield return new WaitForSecondsRealtime(timeInSlow);
-        
+
         Time.timeScale = 1f;
         isSlow = false;
         Debug.Log("Stop slow");   

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4500299356156600186}
   - component: {fileID: 4372206176207687747}
   - component: {fileID: 9155671113755592902}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 106363396922074523}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShootPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,9 +198,9 @@ GameObject:
   - component: {fileID: 6591636917537332671}
   - component: {fileID: 4661667479290269880}
   - component: {fileID: 2947170514597433346}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -421,6 +421,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AssaultRifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773629109403164524, guid: 4f7bc8fee64a49b4db38c54464c14f5b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868913381836170825, guid: 4f7bc8fee64a49b4db38c54464c14f5b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
