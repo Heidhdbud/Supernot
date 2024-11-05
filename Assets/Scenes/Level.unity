@@ -3655,6 +3655,7 @@ MonoBehaviour:
   MenuCam: {fileID: 988510792}
   LoseUI: {fileID: 1993039412}
   WinUI: {fileID: 590221347}
+  player: {fileID: 2044383480}
   enemies: []
 --- !u!4 &728596739
 Transform:
@@ -14038,6 +14039,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2044383480 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2672296393241890569, guid: a669dda43f82a454ebd16b035231e7fd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1380008621}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2045007137
 GameObject:
   m_ObjectHideFlags: 0

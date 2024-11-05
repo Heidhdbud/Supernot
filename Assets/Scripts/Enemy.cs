@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] EnemyGun thisGun;
     private void Awake()
     {
-        _player = GameObject.FindGameObjectWithTag("Player").transform;
+        _player = GameManager.Instance.player.transform;
         _agent = GetComponent<NavMeshAgent>();
         _currentState = new Patrol(this, _agent, thisGun);
     }

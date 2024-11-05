@@ -7,9 +7,11 @@ public class Bullet : MonoBehaviour
     Rigidbody rb;
     TrailRenderer trailRenderer;
     public bool isPlayer = false;
+    AudioSource audioSource;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = PlayerController.Instance.GetComponent<AudioSource>();
         trailRenderer = transform.GetChild(0).GetComponent<TrailRenderer>();
     }
     private void OnDisable()
@@ -32,11 +34,13 @@ public class Bullet : MonoBehaviour
             }
 
             enemy.SetActive(false);
+            audioSource.Play();
         }
         else if (collision.gameObject.tag == "Player" && !isPlayer)
         {
             collision.gameObject.SetActive(false);
             GameManager.Instance.EndGame(false);
+            audioSource.Play();
         }
 
         gameObject.SetActive(false);

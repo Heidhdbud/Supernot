@@ -12,11 +12,13 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] CanvasGroup menuUI;
     [SerializeField] CinemachineVirtualCamera playerCam;
     [SerializeField] CinemachineVirtualCamera MenuCam;
-    GameObject player;
+    
     [Header("Win Control")]
     [SerializeField] GameObject LoseUI;
     [SerializeField] GameObject WinUI;
     private bool gameFinished = false;
+    [Space]
+    public GameObject player;
     public List<GameObject> enemies;
 
     public void Awake()
